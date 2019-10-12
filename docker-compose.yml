@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+    fuckryan-network:
+
+services:
+  fuckryanjava:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    networks:
+      - fuckryan-network
+    ports:
+      - "5000:8080"
+  redis:
+    image: "redis:latest"
+    networks:
+      - fuckryan-network

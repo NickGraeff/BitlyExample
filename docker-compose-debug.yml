@@ -1,0 +1,24 @@
+version: '3'
+
+networks:
+  fuckryan-network:
+
+services:
+  fuckryanjava:
+    build:
+      context: .
+      dockerfile: Dockerfile-debug
+    depends_on:
+      - redis
+    networks:
+      - fuckryan-network
+    volumes:
+      - .:/project
+    ports:
+      - "5000:8080"
+      - "5001:5001"
+    command: java -jar project/target/gs-spring-boot-docker-0.1.0.jar
+  redis:
+    image: "redis:latest"
+    networks:
+      - fuckryan-network
