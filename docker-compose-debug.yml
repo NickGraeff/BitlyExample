@@ -1,24 +1,27 @@
-version: '3'
+version: '3.7'
 
 networks:
-  fuckryan-network:
+  bitly-network:
 
 services:
-  fuckryanjava:
+  bitly:
     build:
-      context: .
+      context: bitly
       dockerfile: Dockerfile-debug
     depends_on:
       - redis
     networks:
-      - fuckryan-network
+      - bitly-network
     volumes:
-      - .:/project
+      - ./bitly:/project
     ports:
       - "5000:8080"
-      - "5001:5001"
-    command: java -jar project/target/gs-spring-boot-docker-0.1.0.jar
+      - "50505:50505"
   redis:
-    image: "redis:latest"
+    build:
+      context: redis
+      dockerfile: Dockerfile-debug
     networks:
-      - fuckryan-network
+      - bitly-network
+    ports:
+      - "6379:6379"

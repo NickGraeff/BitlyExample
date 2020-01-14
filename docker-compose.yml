@@ -1,20 +1,26 @@
-version: '3'
+version: '3.7'
 
 networks:
-    fuckryan-network:
+  bitly-network:
 
 services:
-  fuckryanjava:
+  bitly:
     build:
-      context: .
+      context: bitly
       dockerfile: Dockerfile
     depends_on:
       - redis
     networks:
-      - fuckryan-network
+      - bitly-network
+    volumes:
+      - ./bitly:/project
     ports:
       - "5000:8080"
   redis:
-    image: "redis:latest"
+    build:
+      context: redis
+      dockerfile: Dockerfile
     networks:
-      - fuckryan-network
+      - bitly-network
+    ports:
+      - "6379:6379"
