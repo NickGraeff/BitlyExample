@@ -13,6 +13,8 @@
         <option name="sourceFilePath" value="docker-compose-debug.yml" />
       </settings>
     </deployment>
-    <method v="2" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="gs-spring-boot-docker" run_configuration_type="MavenRunConfiguration" />
+    </method>
   </configuration>
 </component>
