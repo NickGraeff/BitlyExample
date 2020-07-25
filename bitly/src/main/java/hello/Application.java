@@ -3,11 +3,10 @@ package hello;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.Date;
 
 @SpringBootApplication
 @RestController
@@ -32,6 +31,11 @@ public class Application {
         this.thingFormToThing = thingFormToThing;
     }
 
+    @GetMapping("/time")
+    public String getTime() {
+        return new Date(System.currentTimeMillis()).toString();
+    }
+
     @GetMapping("/thing/{id}")
     public String getThing(@PathVariable String id) {
         Thing thing = thingService.loadThing(id);
@@ -39,7 +43,7 @@ public class Application {
     }
 
     @PostMapping("/thing/{id}")
-    public void setThing(@Valid ThingForm thingForm, BindingResult bindingResult) {
+    public void setThing(ThingForm thingForm, BindingResult bindingResult) {
         if(!bindingResult.hasErrors()){
             thingService.saveThing(thingFormToThing.convert(thingForm));
         }

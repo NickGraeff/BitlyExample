@@ -1,2 +1,5 @@
+**/build
+**/.idea
+**/*.iml
 **/target
-.idea/workspace.xml
+**/.gradle
